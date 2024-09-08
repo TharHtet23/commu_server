@@ -18,6 +18,9 @@
     const user = Telegram.WebApp.initDataUnsafe?.user;
     if (user) {
       document.getElementById('user-name').innerText = `Hello, ${user.first_name}!`;
+    } else {
+      document.getElementById('user-name').innerText = 'Welcome, Guest!';
+      console.warn('User data not available');
     }
 
     // Task completion button
@@ -27,7 +30,11 @@
       
       // Send task completion data back to the bot
       setTimeout(() => {
-        Telegram.WebApp.sendData('Task Completed by ' + user.first_name);
+        if (user) {
+          Telegram.WebApp.sendData('Task Completed by ' + user.first_name);
+        } else {
+          Telegram.WebApp.sendData('Task Completed by Guest');
+        }
       }, 1000); // Delay for 1 second to allow user to see the message
     });
   </script>
