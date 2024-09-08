@@ -30,13 +30,13 @@
       
       // Send task completion data back to the bot
       setTimeout(() => {
-        console.log(user);
-        if (user) {
-          console.log(user.first_name);
-          Telegram.WebApp.sendData(JSON.stringify({ message: 'Task Completed', user: user.first_name }));
-        } else {
-          Telegram.WebApp.sendData(JSON.stringify({ message: 'Task Completed', user: 'Guest' }));
-        }
+        console.log('User object:', user);
+        const dataToSend = user 
+          ? { message: 'Task Completed', user: user.first_name }
+          : { message: 'Task Completed', user: 'Guest' };
+        console.log('Sending data:', dataToSend);
+        Telegram.WebApp.sendData(JSON.stringify(dataToSend));
+        console.log('Data sent');
       }, 1000); // Delay for 1 second to allow user to see the message
     });
   </script>
