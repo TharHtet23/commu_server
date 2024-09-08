@@ -22,8 +22,13 @@
 
     // Task completion button
     document.getElementById('complete-task').addEventListener('click', () => {
+      // Show a confirmation message
+      document.getElementById('user-name').innerText = 'Task completed! Closing...';
+      
       // Send task completion data back to the bot
-      Telegram.WebApp.sendData('Task Completed by ' + user.first_name);
+      setTimeout(() => {
+        Telegram.WebApp.sendData('Task Completed by ' + user.first_name);
+      }, 1000); // Delay for 1 second to allow user to see the message
     });
   </script>
 </body>
